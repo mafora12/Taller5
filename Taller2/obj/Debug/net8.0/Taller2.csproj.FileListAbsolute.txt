@@ -1,0 +1,23 @@
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\bin\Debug\net8.0\Taller2.exe
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\bin\Debug\net8.0\Taller2.deps.json
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\bin\Debug\net8.0\Taller2.runtimeconfig.json
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\bin\Debug\net8.0\Taller2.dll
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\bin\Debug\net8.0\Taller2.pdb
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\obj\Debug\net8.0\Taller2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\obj\Debug\net8.0\Taller2.AssemblyInfoInputs.cache
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\obj\Debug\net8.0\Taller2.AssemblyInfo.cs
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\obj\Debug\net8.0\Taller2.csproj.CoreCompileInputs.cache
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\obj\Debug\net8.0\Taller2.sourcelink.json
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\obj\Debug\net8.0\Taller2.dll
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\obj\Debug\net8.0\refint\Taller2.dll
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\obj\Debug\net8.0\Taller2.pdb
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\obj\Debug\net8.0\Taller2.genruntimeconfig.cache
+C:\Users\isabe\OneDrive\Desktop\trabajos val\taller3.cs\Taller2\Taller2\obj\Debug\net8.0\ref\Taller2.dll
+C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\Taller2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\Taller2.AssemblyInfoInputs.cache
+C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\Taller2.AssemblyInfo.cs
+C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\Taller2.csproj.CoreCompileInputs.cache
+C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\Taller2.sourcelink.json
+C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\Taller2.dll
+C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\refint\Taller2.dll
+C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\Taller2.pdb
