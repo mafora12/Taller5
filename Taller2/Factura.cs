@@ -1,107 +1,68 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
 namespace restaurante
 {
-public class Factura 
-{
-    // Diccionario para almacenar las reservas de cada mesa, donde la clave es el número de la mesa y el valor es una Orden.
-    private Dictionary<int, Orden> reservas;
-
-    // Constructor para inicializar el diccionario de reservas.
-    public Factura()
+    public class Factura
     {
-        reservas = new Dictionary<int, Orden>(); // Se inicializa el diccionario en el constructor.
-    }
+        public string Fecha { get; set; }
+        public List<Producto> Productos { get; set; }
+        public string Medio_pago { get; set; }
+        public int Estado_actual { get; set; }
+        public int Numero_factura { get; set; }
 
-    // Método para agregar una reserva a una mesa específica.
-    // Si la mesa no tiene una reserva previa, se crea una nueva Orden.
-    // Luego, se agrega el producto a la orden correspondiente a esa mesa.
-    public void AgregarReserva(int numeroMesa, Producto producto)
-    {
-        if (!reservas.ContainsKey(numeroMesa)) // Verifica si la mesa ya tiene una reserva.
+        public Factura()
         {
-            reservas[numeroMesa] = new Orden(); // Si no tiene reserva, se crea una nueva Orden.
+            Productos = new List<Producto>();
         }
-        reservas[numeroMesa].AgregarProducto(producto); // Se agrega el producto a la Orden de la mesa.
-    }
 
-    // Método para buscar la reserva de una mesa en particular.
-    public Orden BuscarReservaPorMesa(int numeroMesa)
-    {
-        if (reservas.ContainsKey(numeroMesa)) // Verifica si la mesa tiene una reserva.
+        // Método para agregar productos a la factura
+        public void AgregarProductos(string[] nombres, string[] precios)
         {
-            return reservas[numeroMesa]; // Devuelve la Orden si la mesa tiene una reserva.
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(nombres[i]) && float.TryParse(precios[i], out float precio))
+                {
+                    Productos.Add(new Producto(0, nombres[i], precio, 0)); // ID y Cantidad no son relevantes aquí
+                }
+            }
         }
-        else
-        {
-            Console.WriteLine("Mesa no encontrada."); // Muestra un mensaje si la mesa no tiene reserva.
-            return null; // Devuelve null si la mesa no fue encontrada.
-        }
-    }
 
-    // Método para editar un producto en una reserva específica.
-    public void EditarProductoEnReserva(int numeroMesa, int idProducto, string nuevoNombre, float nuevoPrecio)
-    {
-        if (reservas.ContainsKey(numeroMesa)) // Verifica si la mesa tiene una reserva.
+        // Método para formatear productos para CSV
+        public string formatearProductos()
         {
-            reservas[numeroMesa].EditarProducto(idProducto, nuevoNombre, nuevoPrecio); // Edita el producto en la Orden de la mesa.
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < Productos.Count; i++)
+            {
+                sb.Append(Productos[i].Nombre);
+                if (i < Productos.Count - 1)
+                {
+                    sb.Append(";");
+                }
+            }
+            return sb.ToString();
         }
-        else
-        {
-            Console.WriteLine("Mesa no encontrada."); // Mensaje si la mesa no tiene reserva.
-        }
-    }
 
-    // Método para eliminar un producto de una reserva específica.
-    public void EliminarProductoDeReserva(int numeroMesa, int idProducto)
-    {
-        if (reservas.ContainsKey(numeroMesa)) // Verifica si la mesa tiene una reserva.
+        // Método para formatear precios para CSV
+        public string formatearPrecios()
         {
-            reservas[numeroMesa].EliminarProducto(idProducto); // Elimina el producto de la Orden de la mesa.
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < Productos.Count; i++)
+            {
+                sb.Append(Productos[i].Precio.ToString("F2"));
+                if (i < Productos.Count - 1)
+                {
+                    sb.Append(";");
+                }
+            }
+            return sb.ToString();
         }
-        else
-        {
-            Console.WriteLine("Mesa no encontrada."); // Mensaje si la mesa no tiene reserva.
-        }
-    }
 
-    // Método para mostrar todas las reservas.
-    public void MostrarReservas()
-    {
-        foreach (var reserva in reservas) // Itera sobre cada reserva en el diccionario.
+        public override string ToString()
         {
-            Console.WriteLine($"\nMesa {reserva.Key}:"); // Muestra el número de la mesa.
-            reserva.Value.MostrarOrden(); // Muestra los detalles de la orden asociada a esa mesa.
+            return $"Fecha: {Fecha}, Productos: {formatearProductos()}, Precios: {formatearPrecios()}, Medio de Pago: {Medio_pago}, Estado: {Estado_actual}, Número Factura: {Numero_factura}";
         }
-    }
-
-    // Método para mostrar la factura total de todas las mesas.
-    public void MostrarFactura()
-    {
-    
-        float total = 0; // Variable para acumular el total de la factura.
-        
-        foreach (var reserva in reservas) // Itera sobre cada reserva en el diccionario.
-        {
-            Console.WriteLine($"\nMesa {reserva.Key}:"); // Muestra el número de la mesa.
-            reserva.Value.MostrarOrden(); // Muestra la orden de la mesa.
-            total += reserva.Value.CalcularTotal(); // Suma el total de la orden al total general.
-        }
-        
-        // Impresion de la factura.
-        Console.WriteLine("   ____________________________________");
-        Console.WriteLine(" /  |                                  |.");
-        Console.WriteLine("|   |                                  |.");
-        Console.WriteLine("| _|    ___         _                  |.");
-        Console.WriteLine("    |  | __|__ _ __| |_ _  _ _ _ __ _  |.");
-        Console.WriteLine("    |  | _|/ _` / _|  _| || | '_/ _` | |.");
-        Console.WriteLine("    |  |_| |_,__|_|,_|_| _,_ | ||_,__| | ");
-        Console.WriteLine("    |                                  |.");
-        Console.WriteLine($"   |      Total general: ${total}     |." );
-        Console.WriteLine("    |                                  |.");
-        Console.WriteLine("    |   _______________________________|___");
-        Console.WriteLine("    |  /                                  /.");
-        Console.WriteLine("      /__________________________________/."); // Llama a la interfaz para imprimir la factura.
     }
 }
-}
-
 
