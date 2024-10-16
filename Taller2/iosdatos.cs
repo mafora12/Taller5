@@ -6,9 +6,9 @@ using System.Text;
 
    internal class IODatos {
 
-        public const char SEPARADOR_CSV = ','; // Para separar columnas en CSV
+    public const char SEPARADOR_CSV = ','; // Para separar columnas en CSV
 
-            public void GuardarFacturasCSV(Factura[] facturas)
+    public void GuardarFacturasCSV(Factura[] facturas)
     {
         string filePath = @"../../../../archivos/facturas.csv"; // Cambia la ruta si es necesario
         StringBuilder sb = new StringBuilder();
@@ -73,7 +73,7 @@ using System.Text;
                 factura.Fecha = temp[0];  
                 string[] nombres = temp[1].Split('-');
                 string[] precios = temp[2].Split('#');
-                factura.AgregarProductos(nombres, precios);
+                facturas[i].AgregarProductos(nombres, precios);
                 factura.Medio_pago = temp[3];
                 factura.Estado_actual = int.Parse(temp[4]);
                 factura.Numero_factura = int.Parse(temp[5]);

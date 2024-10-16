@@ -6,9 +6,7 @@ internal class Programa
 {
     // Método principal que inicia la ejecución del programa.
     private static void Main(string[] args)
-    {
-        // Instancia de la clase IU para manejar la interfaz de usuario.
-        IU iU = new IU();
+    {        
         // Instancia de la clase MenuAdmin que gestiona los productos del menú.
         MenuAdmin menuAdmin = new MenuAdmin();
         // Instancia de la clase Factura que maneja las reservas y facturas de las mesas.
