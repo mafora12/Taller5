@@ -76,7 +76,7 @@ public class Factura
     // Método para mostrar la factura total de todas las mesas.
     public void MostrarFactura()
     {
-        IU iU = new IU(); // Instancia para manejar la interfaz de usuario.
+    
         float total = 0; // Variable para acumular el total de la factura.
         
         foreach (var reserva in reservas) // Itera sobre cada reserva en el diccionario.
