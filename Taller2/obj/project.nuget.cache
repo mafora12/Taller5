@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hgc3dp6CwdE=",
+  "dgSpecHash": "cOQ+Hwi2zio=",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\Taller5-1\\Taller2\\Taller2.csproj",
+  "projectFilePath": "C:\\Users\\USER\\Documents\\Taller5-1\\Taller2\\Taller2.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\User\\Taller5-1\\Taller2\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

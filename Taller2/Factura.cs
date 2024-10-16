@@ -86,6 +86,7 @@ public class Factura
             total += reserva.Value.CalcularTotal(); // Suma el total de la orden al total general.
         }
         
+        // Impresion de la factura.
         Console.WriteLine("   ____________________________________");
         Console.WriteLine(" /  |                                  |.");
         Console.WriteLine("|   |                                  |.");
