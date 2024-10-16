@@ -112,4 +112,3 @@ namespace restaurante
         // Puedes implementar estos métodos según cómo desees gestionar las facturas
     }
 }
-

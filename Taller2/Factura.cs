@@ -1,94 +1,132 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace restaurante
 {
     public class Factura 
     {
-        // Diccionario para almacenar las reservas de cada mesa, donde la clave es el número de la mesa y el valor es una Orden.
         private Dictionary<int, Orden> reservas;
+        public float DescuentoCumpleaños { get; set; }
+        public float Impuestos { get; set; }
+        public float Propina { get; set; }
+            public int NumeroFactura { get; set; }
+        public Orden Orden { get; set; }
+        public Cliente Cliente { get; set; } // Asociar la factura a un cliente
+         public bool esPagada { get; set; } // Estado de la factura
 
-        // Constructor para inicializar el diccionario de reservas.
         public Factura()
         {
-            reservas = new Dictionary<int, Orden>(); // Se inicializa el diccionario en el constructor.
+            reservas = new Dictionary<int, Orden>();
+            DescuentoCumpleaños = 0;
+            Impuestos = 0;
+            Propina = 0;
         }
 
-        // Método para agregar una reserva a una mesa específica.
-        // Si la mesa no tiene una reserva previa, se crea una nueva Orden.
-        // Luego, se agrega el producto a la orden correspondiente a esa mesa.
+        // Agregar una reserva (orden) a una mesa específica.
         public void AgregarReserva(int numeroMesa, Producto producto, int cantidad = 1)
         {
-            if (!reservas.ContainsKey(numeroMesa)) // Verifica si la mesa ya tiene una reserva.
+            if (!reservas.ContainsKey(numeroMesa))
             {
-                reservas[numeroMesa] = new Orden(); // Si no tiene reserva, se crea una nueva Orden.
+                reservas[numeroMesa] = new Orden(numeroMesa);
             }
-            reservas[numeroMesa].AgregarProducto(producto, cantidad); // Se agrega el producto a la Orden de la mesa.
+            reservas[numeroMesa].AgregarProducto(producto, cantidad);
         }
 
-        // Método para buscar la reserva de una mesa en particular.
+        // Buscar una reserva por el número de la mesa.
         public Orden BuscarReservaPorMesa(int numeroMesa)
         {
-            if (reservas.ContainsKey(numeroMesa)) // Verifica si la mesa tiene una reserva.
-            {
-                return reservas[numeroMesa]; // Devuelve la Orden si la mesa tiene una reserva.
-            }
-            else
-            {
-                Console.WriteLine("Mesa no encontrada."); // Muestra un mensaje si la mesa no tiene reserva.
-                return null; // Devuelve null si la mesa no fue encontrada.
-            }
+            return reservas.ContainsKey(numeroMesa) ? reservas[numeroMesa] : null;
         }
 
-        // Método para editar un producto en una reserva específica.
+        // Editar un producto en una reserva específica.
         public void EditarProductoEnReserva(int numeroMesa, int idProducto, string nuevoNombre, float nuevoPrecio)
         {
-            if (reservas.ContainsKey(numeroMesa)) // Verifica si la mesa tiene una reserva.
+            if (reservas.ContainsKey(numeroMesa))
             {
-                reservas[numeroMesa].EditarProducto(idProducto, nuevoNombre, nuevoPrecio); // Edita el producto en la Orden de la mesa.
+                reservas[numeroMesa].EditarProducto(idProducto, nuevoNombre, nuevoPrecio);
             }
             else
             {
-                Console.WriteLine("Mesa no encontrada."); // Mensaje si la mesa no tiene reserva.
+                Console.WriteLine("Mesa no encontrada.");
             }
         }
 
-        // Método para eliminar un producto de una reserva específica.
+        // Eliminar un producto de una reserva.
         public void EliminarProductoDeReserva(int numeroMesa, int idProducto)
         {
-            if (reservas.ContainsKey(numeroMesa)) // Verifica si la mesa tiene una reserva.
+            if (reservas.ContainsKey(numeroMesa))
             {
-                reservas[numeroMesa].EliminarProducto(idProducto); // Elimina el producto de la Orden de la mesa.
+                reservas[numeroMesa].EliminarProducto(idProducto);
             }
             else
             {
-                Console.WriteLine("Mesa no encontrada."); // Mensaje si la mesa no tiene reserva.
+                Console.WriteLine("Mesa no encontrada.");
             }
         }
 
-        // Método para mostrar todas las reservas.
+        // Mostrar todas las reservas.
         public void MostrarReservas()
         {
-            foreach (var reserva in reservas) // Itera sobre cada reserva en el diccionario.
+            foreach (var reserva in reservas)
             {
-                Console.WriteLine($"\nMesa {reserva.Key}:"); // Muestra el número de la mesa.
-                reserva.Value.MostrarOrden(); // Muestra los detalles de la orden asociada a esa mesa.
+                Console.WriteLine($"\nMesa {reserva.Key}:");
+                reserva.Value.MostrarOrden();
             }
         }
 
-        // Método para mostrar la factura total de todas las mesas.
+        // Mostrar factura detallada (tirilla) para una mesa específica.
+        public void MostrarTirilla(int numeroMesa)
+        {
+            var orden = BuscarReservaPorMesa(numeroMesa);
+            if (orden == null)
+            {
+                Console.WriteLine("No hay reservas para esta mesa.");
+                return;
+            }
+
+            Console.WriteLine("\n--- TIRILLA ---");
+            Console.WriteLine($"Mesa: {numeroMesa}");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("Producto\tCantidad\tPrecio Unitario\tTotal");
+
+            float totalGeneral = 0;
+
+
+            // Calcular descuentos, impuestos y propina
+            float descuentoAplicado = (DescuentoCumpleaños > 0) ? (totalGeneral * DescuentoCumpleaños / 100) : 0;
+            float totalConDescuento = totalGeneral - descuentoAplicado;
+            float totalConImpuestos = totalConDescuento + Impuestos;
+
+            Console.WriteLine("------------------------------");
+            Console.WriteLine($"Subtotal: \t\t\t${totalGeneral:F2}");
+
+            if (DescuentoCumpleaños > 0)
+                Console.WriteLine($"Descuento ({DescuentoCumpleaños}%): \t-${descuentoAplicado:F2}");
+
+            Console.WriteLine($"Impuestos: \t\t\t${Impuestos:F2}");
+
+            if (Propina > 0)
+                Console.WriteLine($"Propina: \t\t\t${Propina:F2}");
+
+            Console.WriteLine("------------------------------");
+            Console.WriteLine($"Total a Pagar: \t\t\t${totalConImpuestos + Propina:F2}");
+        }
+
+        // Mostrar factura total para todas las mesas.
         public void MostrarFactura()
         {
-            float total = 0; // Variable para acumular el total de la factura.
-            
-            foreach (var reserva in reservas) // Itera sobre cada reserva en el diccionario.
+            float total = 0;
+
+            foreach (var reserva in reservas)
             {
-                Console.WriteLine($"\nMesa {reserva.Key}:"); // Muestra el número de la mesa.
-                reserva.Value.MostrarOrden(); // Muestra la orden de la mesa.
-                total += reserva.Value.CalcularTotal(); // Suma el total de la orden al total general.
+                Console.WriteLine($"\nMesa {reserva.Key}:");
+                reserva.Value.MostrarOrden();
+                total += reserva.Value.CalcularTotal();
             }
-            
-            // Arte ASCII de la factura
+
+            Console.WriteLine($"\nTotal general de todas las mesas: ${total:F2}");
+             // Arte ASCII de la factura
             Console.WriteLine("                                       ||      |    |    |       | ");
             Console.WriteLine("                                        ||     |    |    |      |");
             Console.WriteLine("                                         ||    |    |    |     |");
@@ -151,9 +189,25 @@ namespace restaurante
             Console.WriteLine("                                    |           |       |           ||");
             Console.WriteLine("                                     |          |       |          |");
         }
+    
+          
+           
+        
+    
+
+    public Factura(int numeroFactura, Orden orden, Cliente cliente)
+    {
+        NumeroFactura = numeroFactura;
+        Orden = orden;
+        Cliente = cliente;
+        esPagada = false;
+    }
+
+    public void MarcarComoPagada()
+    {
+        esPagada = true;
     }
 }
 
-
-
-
+    
+}

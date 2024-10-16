@@ -32,19 +32,21 @@ namespace restaurante
                 foreach (var linea in lineas.Skip(1)) // Ignorar encabezado
                 {
                     var datos = linea.Split(SEPARADOR_CSV);
-                    if (datos.Length < 4)
+                    if (datos.Length < 5)
                         continue;
 
                     if (!int.TryParse(datos[0], out int id))
                         continue;
-                    string categoria = datos[1].Trim();
+                    string categoria = datos[1].Trim().ToLower();
                     string nombre = datos[2].Trim();
                     if (!float.TryParse(datos[3], out float precio))
                         continue;
+                    if (!int.TryParse(datos[4], out int cantidad))
+                        continue;
 
-                    Producto producto = new Producto(id, nombre, precio);
+                    Producto producto = new Producto(id, nombre, precio, cantidad);
 
-                    switch (categoria.ToLower())
+                    switch (categoria)
                     {
                         case "almuerzo":
                             menuAdmin.ObtenerAlmuerzos().Add(producto);
@@ -76,23 +78,23 @@ namespace restaurante
         public void GuardarInventario(MenuAdmin menuAdmin)
         {
             var sb = new StringBuilder();
-            sb.AppendLine("ID,Categoria,Nombre,Precio");
+            sb.AppendLine("ID,Categoria,Nombre,Precio,Cantidad");
 
             foreach (var producto in menuAdmin.ObtenerAlmuerzos())
             {
-                sb.AppendLine($"{producto.Id},Almuerzo,{producto.nombre},{producto.precio}");
+                sb.AppendLine($"{producto.Id},Almuerzo,{producto.Nombre},{producto.precio},{producto.Cantidad}");
             }
             foreach (var producto in menuAdmin.ObtenerDesayunos())
             {
-                sb.AppendLine($"{producto.Id},Desayuno,{producto.nombre},{producto.precio}");
+                sb.AppendLine($"{producto.Id},Desayuno,{producto.Nombre},{producto.precio},{producto.Cantidad}");
             }
             foreach (var producto in menuAdmin.ObtenerBebidas())
             {
-                sb.AppendLine($"{producto.Id},Bebida,{producto.nombre},{producto.precio}");
+                sb.AppendLine($"{producto.Id},Bebida,{producto.Nombre},{producto.precio},{producto.Cantidad}");
             }
             foreach (var producto in menuAdmin.ObtenerPostres())
             {
-                sb.AppendLine($"{producto.Id},Postre,{producto.nombre},{producto.precio}");
+                sb.AppendLine($"{producto.Id},Postre,{producto.Nombre},{producto.precio},{producto.Cantidad}");
             }
 
             try
@@ -107,4 +109,3 @@ namespace restaurante
         }
     }
 }
-

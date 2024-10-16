@@ -8,8 +8,11 @@ namespace restaurante
     {
         private List<Producto> productos;
 
+        public IEnumerable<object> Productos { get; internal set; }
+
         // Constructor para inicializar la lista
-        public Orden()
+
+        public Orden(int numeroMesa = 1)
         {
             productos = new List<Producto>();
         }
@@ -71,6 +74,25 @@ namespace restaurante
         {
             return productos.Sum(p => p.precio * p.Cantidad);
         }
+
+        public void MostrarTirilla()
+{
+    Console.WriteLine("\n--- TIRILLA ---");
+    Console.WriteLine("Producto\tCantidad\tPrecio Unitario\tTotal");
+
+    float totalGeneral = 0;
+    foreach (var producto in productos)
+    {
+        float totalProducto = producto.precio * producto.Cantidad;
+        totalGeneral += totalProducto;
+        Console.WriteLine($"{producto.nombre}\t{producto.Cantidad}\t${producto.precio:F2}\t${totalProducto:F2}");
+    }
+
+    Console.WriteLine($"Total de la orden: \t${totalGeneral:F2}");
+}
+
     }
 }
+
+
 
