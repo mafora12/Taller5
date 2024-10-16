@@ -4,7 +4,10 @@ Programa el cual administra tirillas, esto es parte del taller 5 para programaci
 * Felipe Gonzalez Tovar.
 * Mariana Florez Ramires.
 * Jakeline María Avila Verbel.
+# ¿Cómo usar?
+* Primero se va a mostrar el menú con diferentes opciones
 # Recursos
 * [Generador de texto ASCII](https://www.ascii-art-generator.org/)
+  
 
 
