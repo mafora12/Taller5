@@ -1,170 +1,171 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using restaurante;
+using System.IO;
 
 namespace restaurante
 {
-
-
-    internal class Programa
-{
-    // Método principal que inicia la ejecución del programa.
-    private static void Main(string[] args)
-    {        
-        // Instancia de la clase MenuAdmin que gestiona los productos del menú.
-        MenuAdmin menuAdmin = new MenuAdmin();
-        // Instancia de la clase Factura que maneja las reservas y facturas de las mesas.
-        Factura factura = new Factura();
-        
-        // Muestra el logo del sistema al iniciar.
-        Console.WriteLine("    _____                          _______         ");
-        Console.WriteLine("   |_   _|                        |_   __ | "       );
-        Console.WriteLine("     | | __   _   ,--.   _ .--.     | |__) |,--.   ");
-        Console.WriteLine("     | |[  | | | `'_| : [ `.-. |    |  ___/`'_| :"  );
-        Console.WriteLine("| |__' | | |_| |,// | |, | | | |   _| |_   // | |, ");
-        Console.WriteLine("`.____.' '.__.'_/\'-;__/[___||__] |_____|  \'-;__/" );
-    
-
-        // Ciclo principal del programa que muestra el menú de opciones.
-        while (true)
+    class Program
+    {
+        static void Main(string[] args)
         {
-            // Muestra las opciones del programa.
-            Console.WriteLine("   _.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._");
-            Console.WriteLine(" ,'_.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._`.");
-            Console.WriteLine("  ))                                                      ((");
-            Console.WriteLine(" ((    \n1. Ver menú                                       ))");
-            Console.WriteLine("  ))     2. Hacer una reserva                             ((");
-            Console.WriteLine(" ((      3. Ver reservas                                   ))");
-            Console.WriteLine("  ))     4. Editar producto en reserva                    ((");
-            Console.WriteLine(" ((      5. Añadir producto a una reserva existente        ))");
-            Console.WriteLine("  ))     6. Generar factura                                ((");
-            Console.WriteLine(" ((      7. Editar menú                                     ))");
-            Console.WriteLine("  ))     0. Salir                                          ((");
-            Console.WriteLine(" ((_.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._))");
-            Console.WriteLine("  `._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._,'");
-            Console.Write("Seleccione una opción: ");
-
-            // Captura la opción elegida por el usuario.
-            int opcion = int.Parse(Console.ReadLine());
-
-            // Estructura switch para manejar la opción seleccionada.
-            switch (opcion)
+            // Asegurarse de que la carpeta 'archivos' exista
+            string carpetaArchivos = "archivos";
+            if (!Directory.Exists(carpetaArchivos))
             {
-                case 1:
-                    // Mostrar productos según la categoría seleccionada.
-                    Console.WriteLine("\nSeleccione una categoría:");
-                    Console.WriteLine("1. Almuerzos");
-                    Console.WriteLine("2. Desayunos");
-                    Console.WriteLine("3. Bebidas");
-                    Console.WriteLine("4. Postres");
-                    Console.WriteLine("5. Ver todo");
-                    Console.Write("Opción: ");
-                    int categoria = int.Parse(Console.ReadLine());
-                    // Llama al método para mostrar productos de la categoría seleccionada.
-                    menuAdmin.VerProductos(categoria);
-                    break;
-                case 2:
-                    // Llama al método para hacer una reserva.
-                    HacerReserva(menuAdmin, factura);
-                    break;
-                case 3:
-                    // Muestra todas las reservas actuales.
-                    factura.MostrarReservas();
-                    break;
-                case 4:
-                    // Llama al método para editar un producto dentro de una reserva.
-                    EditarProductoEnReserva(factura);
-                    break;
-                case 5:
-                    // Otra opción para hacer una reserva (misma funcionalidad que la opción 2).
-                    HacerReserva(menuAdmin, factura);
-                    break;
-                case 6:
-                    // Muestra la factura total de todas las mesas.
-                    factura.MostrarFactura();
-                    break;
-                case 7:
-                    // Llama al método para editar un producto en el menú.
-                    EditarProductoEnMenu(menuAdmin);
-                    break;
-                case 0:
-                    // Sale del programa.
-                    Environment.Exit(0);
-                    break;
-                default:
-                    // Opción inválida.
-                    Console.WriteLine("Opción no válida.");
-                    break;
+                Directory.CreateDirectory(carpetaArchivos);
+                Console.WriteLine("Carpeta 'archivos' creada.");
+            }
+
+            IODatos ioDatos = new IODatos();
+            List<Producto> inventario = ioDatos.CargarInventarioCSV();
+            Factura[] facturas = ioDatos.CargarFacturasCSV();
+
+            bool salir = false;
+            while (!salir)
+            {
+                Console.WriteLine("\n--- Menú Principal ---");
+                Console.WriteLine("1. Realizar una venta");
+                Console.WriteLine("2. Guardar Inventario");
+                Console.WriteLine("3. Mostrar Inventario");
+                Console.WriteLine("4. Salir");
+                Console.Write("Seleccione una opción: ");
+                string opcion = Console.ReadLine();
+
+                switch (opcion)
+                {
+                    case "1":
+                        RealizarVenta(inventario, ref facturas);
+                        break;
+                    case "2":
+                        ioDatos.GuardarInventarioCSV(inventario);
+                        ioDatos.GuardarFacturasCSV(facturas);
+                        break;
+                    case "3":
+                        MostrarInventario(inventario);
+                        break;
+                    case "4":
+                        // Guardar antes de salir
+                        ioDatos.GuardarInventarioCSV(inventario);
+                        ioDatos.GuardarFacturasCSV(facturas);
+                        salir = true;
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida. Intente nuevamente.");
+                        break;
+                }
+            }
+
+            Console.WriteLine("Programa finalizado.");
+        }
+
+        static void MostrarInventario(List<Producto> inventario)
+        {
+            Console.WriteLine("\n--- Inventario ---");
+            foreach (var producto in inventario)
+            {
+                Console.WriteLine(producto);
             }
         }
-    }
 
-    // Método que gestiona la creación de una reserva.
-    private static void HacerReserva(MenuAdmin menuAdmin, Factura factura)
-    {
-        // Solicita el ID del producto que se desea agregar a la reserva.
-        Console.Write("Ingrese el ID del producto a reservar: ");
-        int idProducto = int.Parse(Console.ReadLine());
-        // Busca el producto por su ID.
-        Producto producto = menuAdmin.BuscarProductoPorId(idProducto);
-        
-        // Si el producto existe, solicita el número de mesa y lo agrega a la reserva.
-        if (producto != null)
+        static void RealizarVenta(List<Producto> inventario, ref Factura[] facturas)
         {
-            Console.Write("Ingrese el número de la mesa: ");
-            int numeroMesa = int.Parse(Console.ReadLine());
-            factura.AgregarReserva(numeroMesa, producto);
-            Console.WriteLine("Producto agregado a la reserva.");
-        }
-        else
-        {
-            // Si el producto no se encuentra, muestra un mensaje de error.
-            Console.WriteLine("Producto no encontrado.");
-        }
-    }
+            Console.Write("Ingrese el ID del producto vendido: ");
+            if (int.TryParse(Console.ReadLine(), out int id))
+            {
+                Producto producto = inventario.Find(p => p.Id == id);
+                if (producto != null)
+                {
+                    Console.Write("Ingrese la cantidad vendida: ");
+                    if (int.TryParse(Console.ReadLine(), out int cantidadVendida))
+                    {
+                        if (cantidadVendida <= 0)
+                        {
+                            Console.WriteLine("La cantidad vendida debe ser mayor que cero.");
+                            return;
+                        }
 
-    // Método que permite editar un producto en una reserva existente.
-    private static void EditarProductoEnReserva(Factura factura)
-    {
-        // Solicita el número de la mesa cuya reserva se quiere modificar.
-        Console.Write("Ingrese el número de la mesa: ");
-        int mesa = int.Parse(Console.ReadLine());
-        // Busca la reserva por el número de la mesa.
-        Orden orden = factura.BuscarReservaPorMesa(mesa);
-        
-        // Si la reserva existe, permite editar un producto dentro de la orden.
-        if (orden != null)
-        {
-            Console.Write("Ingrese el ID del producto a editar: ");
-            int idProd = int.Parse(Console.ReadLine());
-            Console.Write("Ingrese el nuevo nombre del producto: ");
-            string nuevoNombre = Console.ReadLine();
-            Console.Write("Ingrese el nuevo precio del producto: ");
-            float nuevoPrecio = float.Parse(Console.ReadLine());
-            // Llama al método para editar el producto.
-            orden.EditarProducto(idProd, nuevoNombre, nuevoPrecio);
-        }
-        else
-        {
-            // Si la reserva no se encuentra, muestra un mensaje de error.
-            Console.WriteLine("Reserva no encontrada.");
-        }
-    }
+                        if (producto.Cantidad >= cantidadVendida)
+                        {
+                            producto.Cantidad -= cantidadVendida;
+                            Console.WriteLine($"Venta registrada: {cantidadVendida} unidad(es) de {producto.Nombre}.");
 
-    // Método que permite editar un producto del menú.
-    private static void EditarProductoEnMenu(MenuAdmin menuAdmin)
-    {
-        // Solicita el ID del producto que se quiere editar.
-        Console.Write("Ingrese el ID del producto a editar: ");
-        int idProd = int.Parse(Console.ReadLine());
-        // Solicita los nuevos detalles del producto.
-        Console.Write("Ingrese el nuevo nombre del producto: ");
-        string nuevoNombre = Console.ReadLine();
-        Console.Write("Ingrese el nuevo precio del producto: ");
-        float nuevoPrecio = float.Parse(Console.ReadLine());
-        // Llama al método para editar el producto en el menú.
-        menuAdmin.EditarProductoEnMenu(idProd, nuevoNombre, nuevoPrecio);
+                            // Crear una nueva factura
+                            Factura nuevaFactura = new Factura
+                            {
+                                Fecha = DateTime.Now.ToString("yyyy-MM-dd"),
+                                Medio_pago = ObtenerMedioPago(),
+                                Estado_actual = 1, // Por ejemplo, 1 para "Pagada"
+                                Numero_factura = GenerarNumeroFactura(facturas)
+                            };
+
+                            nuevaFactura.Productos.Add(new Producto(producto.Id, producto.Nombre, producto.Precio, cantidadVendida));
+
+                            // Agregar la nueva factura al array
+                            facturas = AgregarFactura(facturas, nuevaFactura);
+                        }
+                        else
+                        {
+                            Console.WriteLine("No hay suficiente inventario para esta venta.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cantidad inválida.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Producto no encontrado en el inventario.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("ID inválido.");
+            }
+        }
+
+        static string ObtenerMedioPago()
+        {
+            Console.WriteLine("Seleccione el medio de pago:");
+            Console.WriteLine("1. Efectivo");
+            Console.WriteLine("2. Tarjeta");
+            Console.WriteLine("3. Otro");
+            Console.Write("Opción: ");
+            string opcion = Console.ReadLine();
+            switch (opcion)
+            {
+                case "1":
+                    return "Efectivo";
+                case "2":
+                    return "Tarjeta";
+                case "3":
+                    Console.Write("Ingrese el medio de pago: ");
+                    return Console.ReadLine();
+                default:
+                    Console.WriteLine("Opción no válida. Se asignará 'Otro'.");
+                    return "Otro";
+            }
+        }
+
+        static int GenerarNumeroFactura(Factura[] facturas)
+        {
+            if (facturas.Length == 0)
+                return 1001; // Número inicial
+
+            int maxNumero = 1000;
+            foreach (var factura in facturas)
+            {
+                if (factura.Numero_factura > maxNumero)
+                    maxNumero = factura.Numero_factura;
+            }
+            return maxNumero + 1;
+        }
+
+        static Factura[] AgregarFactura(Factura[] facturas, Factura nuevaFactura)
+        {
+            List<Factura> listaFacturas = new List<Factura>(facturas);
+            listaFacturas.Add(nuevaFactura);
+            return listaFacturas.ToArray();
+        }
     }
 }
- }
