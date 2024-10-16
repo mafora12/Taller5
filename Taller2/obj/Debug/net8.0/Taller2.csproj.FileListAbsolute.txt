@@ -21,6 +21,7 @@ C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\Taller2.sourcelin
 C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\Taller2.dll
 C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\refint\Taller2.dll
 C:\Users\DELL NV2 PRO\Desktop\Taller2\Taller2\obj\Debug\net8.0\Taller2.pdb
+<<<<<<< HEAD
 C:\Users\User\Taller5\Taller2\obj\Debug\net8.0\Taller2.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\User\Taller5\Taller2\obj\Debug\net8.0\Taller2.AssemblyInfoInputs.cache
 C:\Users\User\Taller5\Taller2\obj\Debug\net8.0\Taller2.AssemblyInfo.cs
@@ -29,3 +30,13 @@ C:\Users\User\Taller5\Taller2\obj\Debug\net8.0\Taller2.sourcelink.json
 C:\Users\User\Taller5\Taller2\obj\Debug\net8.0\Taller2.dll
 C:\Users\User\Taller5\Taller2\obj\Debug\net8.0\refint\Taller2.dll
 C:\Users\User\Taller5\Taller2\obj\Debug\net8.0\Taller2.pdb
+=======
+C:\Users\USER\Documents\Taller5\Taller2\obj\Debug\net8.0\Taller2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Documents\Taller5\Taller2\obj\Debug\net8.0\Taller2.AssemblyInfoInputs.cache
+C:\Users\USER\Documents\Taller5\Taller2\obj\Debug\net8.0\Taller2.AssemblyInfo.cs
+C:\Users\USER\Documents\Taller5\Taller2\obj\Debug\net8.0\Taller2.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\Taller5\Taller2\obj\Debug\net8.0\Taller2.sourcelink.json
+C:\Users\USER\Documents\Taller5\Taller2\obj\Debug\net8.0\Taller2.dll
+C:\Users\USER\Documents\Taller5\Taller2\obj\Debug\net8.0\refint\Taller2.dll
+C:\Users\USER\Documents\Taller5\Taller2\obj\Debug\net8.0\Taller2.pdb
+>>>>>>> f96bbfc64d419fa0ab8269eddbaf506f587584b7

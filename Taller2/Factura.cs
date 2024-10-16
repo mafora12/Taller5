@@ -86,7 +86,19 @@ public class Factura
             total += reserva.Value.CalcularTotal(); // Suma el total de la orden al total general.
         }
         
-        iU.ImpresionFactura(); // Llama a la interfaz para imprimir la factura.
+        Console.WriteLine("   ____________________________________");
+        Console.WriteLine(" /  |                                  |.");
+        Console.WriteLine("|   |                                  |.");
+        Console.WriteLine("| _|    ___         _                  |.");
+        Console.WriteLine("    |  | __|__ _ __| |_ _  _ _ _ __ _  |.");
+        Console.WriteLine("    |  | _|/ _` / _|  _| || | '_/ _` | |.");
+        Console.WriteLine("    |  |_| |_,__|_|,_|_| _,_ | ||_,__| | ");
+        Console.WriteLine("    |                                  |.");
+        Console.WriteLine($"   |      Total general: ${total}     |." );
+        Console.WriteLine("    |                                  |.");
+        Console.WriteLine("    |   _______________________________|___");
+        Console.WriteLine("    |  /                                  /.");
+        Console.WriteLine("      /__________________________________/."); // Llama a la interfaz para imprimir la factura.
     }
 }
 }

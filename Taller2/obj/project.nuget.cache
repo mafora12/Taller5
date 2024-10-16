@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "VLqoQhub1EE=",
   "success": true,
   "projectFilePath": "C:\\Users\\User\\Taller5\\Taller2\\Taller2.csproj",
+=======
+  "dgSpecHash": "Unwgk6SU3J4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\USER\\Documents\\Taller5\\Taller2\\Taller2.csproj",
+>>>>>>> f96bbfc64d419fa0ab8269eddbaf506f587584b7
   "expectedPackageFiles": [],
   "logs": []
 }

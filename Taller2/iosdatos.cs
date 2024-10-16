@@ -16,7 +16,13 @@ using System.Text;
     StringBuilder sb = new StringBuilder();
     sb.AppendLine("FECHA,NOMBRE1,NOMBRE2,PRECIO1,PRECIO2,MEDIO DE PAGO,ESTADO ACTUAL,NUMERO FACTURA"); // Encabezados
 
+<<<<<<< HEAD
     foreach (Factura factura in facturas)
+=======
+    public const char SEPARADOR_CSV = ','; // Para separar columnas en CSV
+
+    public void GuardarFacturasCSV(Factura[] facturas)
+>>>>>>> f96bbfc64d419fa0ab8269eddbaf506f587584b7
     {
         if (factura != null)
         {
@@ -90,6 +96,7 @@ using System.Text;
 
         for (int i = 1; i < lineas.Length; i++) // Saltar el encabezado
         {
+<<<<<<< HEAD
             string[] temp = lineas[i].Split(SEPARADOR_CSV);
             Factura factura = new Factura();
             factura.Fecha = temp[0];
@@ -100,6 +107,26 @@ using System.Text;
             factura.Estado_actual = int.Parse(temp[6]);
             factura.Numero_factura = int.Parse(temp[7]);
             facturas[i - 1] = factura;
+=======
+            Factura[] facturas = new Factura[lineas.Length];
+
+            for (int i = 1; i < lineas.Length; i++) // Saltar el encabezado
+            {
+                
+                string[] temp = lineas[i].Split(SEPARADOR_CSV);
+                Factura factura = new();
+                factura.Fecha = temp[0];  
+                string[] nombres = temp[1].Split('-');
+                string[] precios = temp[2].Split('#');
+                facturas[i].AgregarProductos(nombres, precios);
+                factura.Medio_pago = temp[3];
+                factura.Estado_actual = int.Parse(temp[4]);
+                factura.Numero_factura = int.Parse(temp[5]);
+                facturas[i] = factura;
+            }
+
+            return facturas;
+>>>>>>> f96bbfc64d419fa0ab8269eddbaf506f587584b7
         }
 
         return facturas;

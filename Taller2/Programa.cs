@@ -11,22 +11,39 @@ namespace restaurante
 {
     // Método principal que inicia la ejecución del programa.
     private static void Main(string[] args)
-    {
-        // Instancia de la clase IU para manejar la interfaz de usuario.
-        IU iU = new IU();
+    {        
         // Instancia de la clase MenuAdmin que gestiona los productos del menú.
         MenuAdmin menuAdmin = new MenuAdmin();
         // Instancia de la clase Factura que maneja las reservas y facturas de las mesas.
         Factura factura = new Factura();
         
         // Muestra el logo del sistema al iniciar.
-        iU.Logo();        
+        Console.WriteLine("    _____                          _______         ");
+        Console.WriteLine("   |_   _|                        |_   __ | "       );
+        Console.WriteLine("     | | __   _   ,--.   _ .--.     | |__) |,--.   ");
+        Console.WriteLine("     | |[  | | | `'_| : [ `.-. |    |  ___/`'_| :"  );
+        Console.WriteLine("| |__' | | |_| |,// | |, | | | |   _| |_   // | |, ");
+        Console.WriteLine("`.____.' '.__.'_/\'-;__/[___||__] |_____|  \'-;__/" );
+    
 
         // Ciclo principal del programa que muestra el menú de opciones.
         while (true)
         {
             // Muestra las opciones del programa.
-            iU.OpcionesPrograma();
+            Console.WriteLine("   _.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._");
+            Console.WriteLine(" ,'_.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._`.");
+            Console.WriteLine("  ))                                                      ((");
+            Console.WriteLine(" ((    \n1. Ver menú                                       ))");
+            Console.WriteLine("  ))     2. Hacer una reserva                             ((");
+            Console.WriteLine(" ((      3. Ver reservas                                   ))");
+            Console.WriteLine("  ))     4. Editar producto en reserva                    ((");
+            Console.WriteLine(" ((      5. Añadir producto a una reserva existente        ))");
+            Console.WriteLine("  ))     6. Generar factura                                ((");
+            Console.WriteLine(" ((      7. Editar menú                                     ))");
+            Console.WriteLine("  ))     0. Salir                                          ((");
+            Console.WriteLine(" ((_.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._))");
+            Console.WriteLine("  `._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._,'");
+            Console.Write("Seleccione una opción: ");
 
             // Captura la opción elegida por el usuario.
             int opcion = int.Parse(Console.ReadLine());
