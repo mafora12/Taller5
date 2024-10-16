@@ -2,18 +2,20 @@ using System;
 
 namespace restaurante
 {
-    public class Producto
+    public class Producto 
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public float Precio { get; set; }
-        public int Cantidad { get; set; }
+        // Propiedades públicas para Id, nombre, precio y cantidad.
+        public int Id { get; private set; }     // Id solo lectura desde fuera.
+        public string nombre { get; set; }      // El nombre puede ser modificado.
+        public float precio { get; set; }       // El precio puede ser modificado.
+        public int Cantidad { get; set; }       // Cantidad disponible en inventario.
 
+        // Constructor para inicializar el producto con su Id, nombre, precio y cantidad.
         public Producto(int id, string nombre, float precio, int cantidad)
         {
             Id = id;
-            Nombre = nombre;
-            Precio = precio;
+            this.nombre = nombre;
+            this.precio = precio;
             Cantidad = cantidad;
         }
 
@@ -22,7 +24,7 @@ namespace restaurante
 
         public override string ToString()
         {
-            return $"ID: {Id}, Nombre: {Nombre}, Precio: {Precio}, Cantidad: {Cantidad}";
+            return $"ID: {Id}, Nombre: {nombre}, Precio: ${precio}, Cantidad: {Cantidad}";
         }
     }
 }
