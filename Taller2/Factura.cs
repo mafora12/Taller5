@@ -17,13 +17,13 @@ namespace restaurante
         // Método para agregar una reserva a una mesa específica.
         // Si la mesa no tiene una reserva previa, se crea una nueva Orden.
         // Luego, se agrega el producto a la orden correspondiente a esa mesa.
-        public void AgregarReserva(int numeroMesa, Producto producto)
+        public void AgregarReserva(int numeroMesa, Producto producto, int cantidad = 1)
         {
             if (!reservas.ContainsKey(numeroMesa)) // Verifica si la mesa ya tiene una reserva.
             {
                 reservas[numeroMesa] = new Orden(); // Si no tiene reserva, se crea una nueva Orden.
             }
-            reservas[numeroMesa].AgregarProducto(producto); // Se agrega el producto a la Orden de la mesa.
+            reservas[numeroMesa].AgregarProducto(producto, cantidad); // Se agrega el producto a la Orden de la mesa.
         }
 
         // Método para buscar la reserva de una mesa en particular.
@@ -115,8 +115,8 @@ namespace restaurante
             Console.WriteLine("|                                                | | |");
             Console.WriteLine("|                                                | | |");
             Console.WriteLine("|                                               oOo oOo");
-            Console.WriteLine("|                                                                                                    |");
-            Console.WriteLine("|                                                                                                    |");
+            Console.WriteLine("|            NOMBRE                     DIRECCIÓN               NIT           NÚMERO                 |");
+            Console.WriteLine("|          COMIDITA * Calle 13 #45-67, MEDELLIN, Colombia * 900123456-7 * (+57) 1 555 1234           |");
             Console.WriteLine("|                                                                                                    |");
             Console.WriteLine("|                                                                                                    |");
             Console.WriteLine("|                                                                                                    |");
@@ -153,3 +153,7 @@ namespace restaurante
         }
     }
 }
+
+
+
+
