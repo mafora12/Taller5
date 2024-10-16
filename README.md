@@ -5,7 +5,7 @@ Programa el cual administra tirillas, esto es parte del taller 5 para programaci
 * Mariana Florez Ramires.
 * Jakeline María Avila Verbel.
 # ¿Cómo usar?
-* Primero se va a mostrar el menú con diferentes opciones, ya sea de agregar productos, editar, hacer reservas, facturas y cargar inventario junto con factura
+* Primero se va a mostrar el menú con diferentes opciones, ya sea de agregar productos, editar, hacer reservas, facturas y cargar inventario junto con la factura. Recomendado hacer el recorrido en
 # Recursos
 * [Generador de texto ASCII](https://www.ascii-art-generator.org/)
   
