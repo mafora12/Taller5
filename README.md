@@ -5,6 +5,6 @@ Programa el cual administra tirillas, esto es parte del taller 5 para programaci
 * Mariana Florez Ramires
 * Jakeline María Avila Verbel
 # Recursos
-* [Generador de texto ASCII] (https://www.ascii-art-generator.org/)
+* [Generador de texto ASCII](https://www.ascii-art-generator.org/)
 
 
