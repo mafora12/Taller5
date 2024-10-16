@@ -1,16 +1,28 @@
+using System;
 
-public class Producto 
+namespace restaurante
 {
-    // Propiedades públicas para Id, nombre y precio.
-    public int Id { get; private set; }     // Id solo lectura desde fuera.
-    public string nombre { get; set; }      // El nombre puede ser modificado.
-    public float precio { get; set; }       // El precio puede ser modificado.
-
-    // Constructor para inicializar el producto con su Id, nombre y precio.
-    public Producto(int id, string nombre, float precio)
+    public class Producto
     {
-        Id = id;
-        this.nombre = nombre;
-        this.precio = precio;
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public float Precio { get; set; }
+        public int Cantidad { get; set; }
+
+        public Producto(int id, string nombre, float precio, int cantidad)
+        {
+            Id = id;
+            Nombre = nombre;
+            Precio = precio;
+            Cantidad = cantidad;
+        }
+
+        // Constructor sin cantidad para compatibilidad
+        public Producto(int id, string nombre, float precio) : this(id, nombre, precio, 0) { }
+
+        public override string ToString()
+        {
+            return $"ID: {Id}, Nombre: {Nombre}, Precio: {Precio}, Cantidad: {Cantidad}";
+        }
     }
 }
