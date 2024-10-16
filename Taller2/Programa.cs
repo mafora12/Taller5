@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using restaurante;
 
-internal class Programa
+namespace restaurante
+{
+
+
+    internal class Programa
 {
     // Método principal que inicia la ejecución del programa.
     private static void Main(string[] args)
@@ -145,3 +150,4 @@ internal class Programa
         menuAdmin.EditarProductoEnMenu(idProd, nuevoNombre, nuevoPrecio);
     }
 }
+ }

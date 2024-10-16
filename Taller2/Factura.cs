@@ -1,4 +1,6 @@
-public class Factura
+namespace restaurante
+{
+public class Factura 
 {
     // Diccionario para almacenar las reservas de cada mesa, donde la clave es el número de la mesa y el valor es una Orden.
     private Dictionary<int, Orden> reservas;
@@ -22,8 +24,6 @@ public class Factura
     }
 
     // Método para buscar la reserva de una mesa en particular.
-    // Si la mesa existe en el diccionario, se devuelve la Orden asociada.
-    // Si no existe, se informa que la mesa no fue encontrada y se devuelve null.
     public Orden BuscarReservaPorMesa(int numeroMesa)
     {
         if (reservas.ContainsKey(numeroMesa)) // Verifica si la mesa tiene una reserva.
@@ -37,8 +37,33 @@ public class Factura
         }
     }
 
+    // Método para editar un producto en una reserva específica.
+    public void EditarProductoEnReserva(int numeroMesa, int idProducto, string nuevoNombre, float nuevoPrecio)
+    {
+        if (reservas.ContainsKey(numeroMesa)) // Verifica si la mesa tiene una reserva.
+        {
+            reservas[numeroMesa].EditarProducto(idProducto, nuevoNombre, nuevoPrecio); // Edita el producto en la Orden de la mesa.
+        }
+        else
+        {
+            Console.WriteLine("Mesa no encontrada."); // Mensaje si la mesa no tiene reserva.
+        }
+    }
+
+    // Método para eliminar un producto de una reserva específica.
+    public void EliminarProductoDeReserva(int numeroMesa, int idProducto)
+    {
+        if (reservas.ContainsKey(numeroMesa)) // Verifica si la mesa tiene una reserva.
+        {
+            reservas[numeroMesa].EliminarProducto(idProducto); // Elimina el producto de la Orden de la mesa.
+        }
+        else
+        {
+            Console.WriteLine("Mesa no encontrada."); // Mensaje si la mesa no tiene reserva.
+        }
+    }
+
     // Método para mostrar todas las reservas.
-    // Recorre el diccionario de reservas y muestra la orden de cada mesa.
     public void MostrarReservas()
     {
         foreach (var reserva in reservas) // Itera sobre cada reserva en el diccionario.
@@ -49,7 +74,6 @@ public class Factura
     }
 
     // Método para mostrar la factura total de todas las mesas.
-    // Recorre el diccionario de reservas, muestra las órdenes y calcula el total.
     public void MostrarFactura()
     {
         IU iU = new IU(); // Instancia para manejar la interfaz de usuario.
@@ -65,3 +89,6 @@ public class Factura
         iU.ImpresionFactura(); // Llama a la interfaz para imprimir la factura.
     }
 }
+}
+
+
